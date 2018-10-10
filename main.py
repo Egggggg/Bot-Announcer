@@ -8,7 +8,6 @@ from tkinter.messagebox import showerror
 
 message = ""
 cid = ""
-token = ""
 
 send_button = ""
 
@@ -17,7 +16,6 @@ bot = commands.Bot(command_prefix="////")
 async def send_message():
     global message
     global cid
-    global token
     global send_button
 
     msg = message.get()
@@ -30,7 +28,6 @@ async def send_message():
 
         message.configure(state=tk.NORMAL)
         cid.configure(state=tk.NORMAL)
-        token.configure(state=tk.NORMAL)
         send_button.configure(state=tk.NORMAL)
 
         return
@@ -47,7 +44,6 @@ async def send_message():
 
             message.configure(state=tk.NORMAL)
             cid.configure(state=tk.NORMAL)
-            token.configure(state=tk.NORMAL)
             send_button.configure(state=tk.NORMAL)
         else:
             try:
@@ -57,7 +53,6 @@ async def send_message():
 
             message.configure(state=tk.NORMAL)
             cid.configure(state=tk.NORMAL)
-            token.configure(state=tk.NORMAL)
             send_button.configure(state=tk.NORMAL)
     else:
         try:
@@ -67,7 +62,6 @@ async def send_message():
 
         message.configure(state=tk.NORMAL)
         cid.configure(state=tk.NORMAL)
-        token.configure(state=tk.NORMAL)
         send_button.configure(state=tk.NORMAL)
 
 class Window(tk.Frame):
@@ -79,37 +73,31 @@ class Window(tk.Frame):
     def init_window(self):
         global message
         global cid
-        global token
         global send_button
 
         self.master.title("Bot Messenger")
 
         tk.Label(self.master, text="Message").grid(row=0)
         tk.Label(self.master, text="Channel ID").grid(row=1)
-        tk.Label(self.master, text="Token").grid(row=2)
 
         message = tk.Entry(self.master, width=35)
         cid = tk.Entry(self.master, width=35)
-        token = tk.Entry(self.master, width=35)
     
         send_button = tk.Button(self.master, text="Send", command=self.send)
 
         message.grid(row=0, column=1)
         cid.grid(row=1, column=1)
-        token.grid(row=2, column=1)
         send_button.grid(row=3, column=0)
 
     def send(self):
         global message
         global cid
-        global token
         global send_button
         global bot_thread
 
         #disables the entries and button while the message sends
         message.configure(state=tk.DISABLED)
         cid.configure(state=tk.DISABLED)
-        token.configure(state=tk.DISABLED)
         send_button.configure(state=tk.DISABLED)
 
         asyncio.ensure_future(send_message())
@@ -118,7 +106,7 @@ def on_closing():
     sys.exit(0)
 
 root = tk.Tk()
-root.geometry("290x90")
+root.geometry("290x69")
 root.resizable(0, 0)
 app = Window(root)
 root.protocol("WM_DELETE_WINDOW", on_closing)
